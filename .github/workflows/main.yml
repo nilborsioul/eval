@@ -67,33 +67,3 @@ jobs:
           heroku_email: "louis.nilbor@gmail.com"
           heroku_app_name: "excelia-eval-louis"
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-
-  test_status_code:
-    # This workflow contains a single job called "build"
-    needs: deploy
-    # The type of runner that the job will run on
-    runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-
-      # Runs a set of commands using the runners shell
-      - name: Statuscode
-        run: |
-          pip install requests
-          python3 -c "import requests; exit(1) if requests.get('https://excelia-tpblanc.herokuapp.com').status_code !=200 else exit(0)"
-
-  test_status_code_develop:
-      # This workflow contains a single job called "build"
-      needs: deploy-develop
-      # The type of runner that the job will run on
-      runs-on: ubuntu-latest
-
-      # Steps represent a sequence of tasks that will be executed as part of the job
-      steps:
-
-        # Runs a set of commands using the runners shell
-        - name: Statuscode
-          run: |
-            pip install requests
-            python3 -c "import requests; exit(1) if requests.get('https://excelia-tpblanc-dev.herokuapp.com').status_code !=200 else exit(0)"
